@@ -16,7 +16,7 @@ public class suma_matrices {
     public double[][] SumaMatrices(double[][] matriz1, double[][] matriz2, int tami,int tamj ){
         double[][] matrizRes=null;
         
-        
+        //Haciendo la transpuesta de la matriz ---saludos
         matrizRes= new double[tami][tamj];
         for (int i = 0; i < tami; i++) {
             for (int j = 0; j < tamj; j++) {             
