@@ -7,6 +7,7 @@ package programa_matrices;
 
 import funciones_matrices.diferencia_matrices;
 import funciones_matrices.suma_matrices;
+import funciones_matrices.transpuesta_matrices;
 import javax.swing.JOptionPane;
 
 /**
@@ -36,20 +37,28 @@ public class MatriceSGUI extends javax.swing.JFrame {
         btnsum = new javax.swing.JButton();
         txt_tamj = new javax.swing.JTextField();
         btnres = new javax.swing.JButton();
+        btntrans = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnsum.setText("Cacuar Suma");
+        btnsum.setText("Suma de Matrices");
         btnsum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsumActionPerformed(evt);
             }
         });
 
-        btnres.setText("Cacuar Resta");
+        btnres.setText("Diferencia de Matrices");
         btnres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnresActionPerformed(evt);
+            }
+        });
+
+        btntrans.setText("Matriz Tranpuesta");
+        btntrans.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntransActionPerformed(evt);
             }
         });
 
@@ -58,34 +67,39 @@ public class MatriceSGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_tami, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_tamj, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(78, 78, 78)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
+                        .addGap(144, 144, 144)
                         .addComponent(bres, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_tami, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_tamj, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(78, 78, 78)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnres)
-                            .addComponent(btnsum))))
-                .addContainerGap(34, Short.MAX_VALUE))
+                    .addComponent(btnsum, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btntrans, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnsum)
-                    .addComponent(txt_tami, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_tamj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnres))
-                .addGap(40, 40, 40)
-                .addComponent(bres, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txt_tami, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(txt_tamj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(113, 113, 113)
+                        .addComponent(bres, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(btnsum, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnres, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btntrans, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -149,6 +163,27 @@ public class MatriceSGUI extends javax.swing.JFrame {
        
     }//GEN-LAST:event_btnresActionPerformed
 
+    private void btntransActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntransActionPerformed
+       int tamx, tamy;
+      double[][] matriz;
+      tamx=Integer.parseInt(txt_tami.getText());
+      tamy=Integer.parseInt(txt_tamj.getText());
+      matriz=new double[tamx][tamy];
+      
+        for (int i = 0; i < tamx; i++) {
+            for (int j = 0; j < tamy; j++) {
+                matriz[i][j]=Double.valueOf(JOptionPane.showInputDialog("Matriz Uno"));
+            }
+        }
+        transpuesta_matrices transpuesta = new transpuesta_matrices();
+        
+        
+            System.out.println(transpuesta.TranpuestaMatriz(matriz, tamx, tamy));
+            
+        
+       
+    }//GEN-LAST:event_btntransActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -188,6 +223,7 @@ public class MatriceSGUI extends javax.swing.JFrame {
     private javax.swing.JLabel bres;
     private javax.swing.JButton btnres;
     private javax.swing.JButton btnsum;
+    private javax.swing.JButton btntrans;
     private javax.swing.JTextField txt_tami;
     private javax.swing.JTextField txt_tamj;
     // End of variables declaration//GEN-END:variables
